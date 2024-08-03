@@ -2,6 +2,7 @@ use tungstenite::connect;
 use url::Url;
 use serde_json;
 use redis::Commands;
+use std::env;
 
 use lib::schema;
 
@@ -12,7 +13,9 @@ const SUPPORTED_ASSETS: [&str; 2] = ["btcusdt@depth20", "ethusdt@depth20"];
 fn main() {    
     println!("Connected to redis.");
 
-    let mut conn = redis::Client::open("redis://127.0.0.1/")
+    let redis_url = env::var("REDIS_URL").unwrap();
+
+    let mut conn = redis::Client::open(redis_url.to_string())
         .expect("Could not create redis client")
         .get_connection()
         .expect("could not create connection");
