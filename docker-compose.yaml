@@ -19,6 +19,7 @@ services:
   job:
     environment:
       REDIS_URL: "redis://redis:6379"
+      BINANCE_WEBSOCKET_URL: "wss://stream.binance.com:9443"
     build:
       context: .
     command: job

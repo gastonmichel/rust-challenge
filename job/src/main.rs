@@ -6,23 +6,23 @@ use std::env;
 
 use lib::schema;
 
-const  BINANCE_WS_API: &str = "wss://stream.binance.com:9443";
-
 const SUPPORTED_ASSETS: [&str; 2] = ["btcusdt@depth20", "ethusdt@depth20"];
 
 fn main() {    
-    println!("Connected to redis.");
-
-    let redis_url = env::var("REDIS_URL").unwrap();
-
+    
+    let redis_url = env::var("REDIS_URL").unwrap_or("redis://127.0.0.1:6379".to_string());
+    
     let mut conn = redis::Client::open(redis_url.to_string())
         .expect("Could not create redis client")
         .get_connection()
         .expect("could not create connection");
 
+    println!("Connected to redis.");
+
+    let binance_ws_url = env::var("BINANCE_WEBSOCKET_URL").unwrap_or("wss://stream.binance.com:9443".to_string());
     let binance_url = format!(
         "{url}/stream?streams={streams}", 
-        url=BINANCE_WS_API, 
+        url=binance_ws_url, 
         streams=SUPPORTED_ASSETS.join("/")
     );
 
