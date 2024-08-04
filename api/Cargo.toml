@@ -11,6 +11,7 @@ serde = "1.0.204"
 serde_json = "1.0.122"
 
 lib = { path = "../lib" }
+redis = "0.26.1"
 
 [dependencies.rocket_db_pools]
 version = "0.2.0"

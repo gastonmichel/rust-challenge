@@ -1,18 +1,20 @@
 #[macro_use] extern crate rocket;
 use rocket::serde::json::Json;
-use rocket_db_pools::{deadpool_redis::{self, redis::AsyncCommands}, Connection, Database};
 
-// use serde::Serialize;
+use std::env;
+use redis::Commands;
+
 use serde_json;
 use lib::schema;
 
-#[derive(Database)]
-#[database("redis")]
-pub struct RedisPool(deadpool_redis::Pool);
-
 #[get("/tip?<symbol>")]
-async fn tip(mut redis: Connection<RedisPool>, symbol: String) -> Json<schema::DepthStreamData> {
-    let data: String = redis.get(&symbol).await.unwrap();
+async fn tip( symbol: String) -> Json<schema::DepthStreamData> {
+    let redis_url = env::var("REDIS_URL").unwrap_or("redis://127.0.0.1:6379".to_string());
+
+    let mut conn = redis::Client::open(redis_url.to_string()).unwrap()
+        .get_connection().unwrap();
+
+    let data: String = conn.get(&symbol).unwrap();
     let data: schema::DepthStreamData = serde_json::from_str(&data).unwrap();
     Json(data)
 }
@@ -21,5 +23,4 @@ async fn tip(mut redis: Connection<RedisPool>, symbol: String) -> Json<schema::D
 fn rocket() -> _ {
     rocket::build()
         .mount("/book", routes![tip])
-        .attach(RedisPool::init())
 }

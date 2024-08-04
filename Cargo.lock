@@ -42,6 +42,7 @@ name = "api"
 version = "0.0.1"
 dependencies = [
  "lib",
+ "redis 0.26.1",
  "rocket",
  "rocket_db_pools",
  "serde",
