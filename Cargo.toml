@@ -1,13 +1,21 @@
+[package]
+name = "rust-challenge"
+version = "0.1.0"
+edition = "2021"
 
-[workspace]
-resolver = "2"
-members = [
-    "lib",
-    "api", 
-    "job", "minigrep", 
-]
+[dependencies]
+rust_decimal = { version = "1.35.0", features = ["serde-with-str"]}
+serde = { version = "1.0.204", features = ["derive"]}
+
+redis = "0.26.1"
+serde_json = "1.0.122"
+tungstenite = { version = "0.23.0", features = ["native-tls"] }
+url = "2.5.2"
 
 
+rocket = { version = "0.5.1", features = ["json"] }
 
-[build]
-target = "x86_64-unknown-linux-musl"
+
+[dependencies.rocket_db_pools]
+version = "0.2.0"
+features = ["deadpool_redis"]

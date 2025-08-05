@@ -38,18 +38,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "api"
-version = "0.0.1"
-dependencies = [
- "lib",
- "redis 0.26.1",
- "rocket",
- "rocket_db_pools",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "arc-swap"
 version = "1.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -745,29 +733,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "49f1f14873335454500d59611f1cf4a4b0f786f9ac11f4312a78e4cf2566695b"
 
 [[package]]
-name = "job"
-version = "0.1.0"
-dependencies = [
- "lib",
- "redis 0.26.1",
- "serde_json",
- "tungstenite",
- "url",
-]
-
-[[package]]
 name = "lazy_static"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
-
-[[package]]
-name = "lib"
-version = "0.1.0"
-dependencies = [
- "rust_decimal",
- "serde",
-]
 
 [[package]]
 name = "libc"
@@ -832,10 +801,6 @@ name = "mime"
 version = "0.3.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6877bb514081ee2a7ff5ef9de3281f14a4dd4bceac4c09388074a6b5df8a139a"
-
-[[package]]
-name = "minigrep"
-version = "0.1.0"
 
 [[package]]
 name = "miniz_oxide"
@@ -1467,6 +1432,20 @@ dependencies = [
  "time",
  "tokio",
  "uncased",
+]
+
+[[package]]
+name = "rust-challenge"
+version = "0.1.0"
+dependencies = [
+ "redis 0.26.1",
+ "rocket",
+ "rocket_db_pools",
+ "rust_decimal",
+ "serde",
+ "serde_json",
+ "tungstenite",
+ "url",
 ]
 
 [[package]]

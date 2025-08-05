@@ -1,14 +1,12 @@
 use serde::{Deserialize, Serialize};
-// use rust_decimal::prelude::Decimal;
+use rust_decimal::prelude::Decimal;
 
 #[derive(Debug,Serialize,Deserialize)]
 pub struct OfferData {
-    // #[serde(with="rust_decimal::serde::str")]
-    // pub price: Decimal,
-    // #[serde(with="rust_decimal::serde::str")]
-    // pub size: Decimal,
-    pub price: String,
-    pub size: String,
+    #[serde(with="rust_decimal::serde::str")]
+    pub price: Decimal,
+    #[serde(with="rust_decimal::serde::str")]
+    pub size: Decimal,
 }
 
 #[derive(Debug,Serialize,Deserialize)]
